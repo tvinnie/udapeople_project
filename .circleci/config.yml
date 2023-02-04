@@ -191,7 +191,7 @@ jobs:
 
   configure-infrastructure:
     docker:
-      - image: circleci/node:13.8.0
+      - image: python:3.7-alpine3.11
     steps:
       - checkout
       - install_awscli
@@ -200,6 +200,11 @@ jobs:
           fingerprints: ["0d:0e:a8:9e:63:da:1b:7a:0a:df:2f:59:11:76:9f:7c"]
       - attach_workspace:
           at: ~/
+      - run:
+          name: Install dependencies
+          command: |
+            apk add --update ansible
+            pip install awscli  
       - run:
           name: Configure Server
           command: |
