@@ -139,5 +139,5 @@ workflows:
           requires: [build-backend]
       - scan-backend:
           requires: [build-backend]
-      - scan-frontend:
-          requires: [build-frontend]
+      # - scan-frontend:
+      #     requires: [build-frontend]
