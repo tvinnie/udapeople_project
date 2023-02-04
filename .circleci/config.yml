@@ -44,7 +44,7 @@ jobs:
           name: Build front-end
           command: |
             cd frontend
-            npm cache clean –force
+            npm cache clean --force
             npm uninstall
            
             npm run build
