@@ -46,7 +46,7 @@ jobs:
             cd frontend
             npm cache clean –force
             npm uninstall
-            npm install
+           
             npm run build
       - save_cache:
           paths: [frontend/node_modules]
