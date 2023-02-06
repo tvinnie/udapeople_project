@@ -85,8 +85,10 @@ jobs:
           name: Build front-end
           command: |
             cd frontend
-            npm install
-            npm run build
+            npm cache clean --force
+            npm uninstall
+            # npm install
+            # npm run build
 
       - save_cache:
           paths: [frontend/node_modules]
