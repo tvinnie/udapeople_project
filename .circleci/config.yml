@@ -103,8 +103,10 @@ jobs:
           name: Back-end build
           command: |
             cd backend
-            npm cache clean --force
-            npm uninstall
+            # npm cache clean --force
+            # npm uninstall
+            npm install
+            npm run build
 
       - save_cache:
           paths: [backend/node_modules]
