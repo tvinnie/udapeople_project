@@ -239,8 +239,9 @@ jobs:
           name: Run database migration
           command: |
             cd ./backend
-            npm install
-            npm run migrations > migrations_log.txt
+            npm clean cache --force
+            # npm install
+            # npm run migrations > migrations_log.txt
       - run:
           name: Send migration status to kvdb.io OR memstash.io
           command: |   
