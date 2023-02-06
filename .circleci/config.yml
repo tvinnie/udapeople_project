@@ -87,8 +87,8 @@ jobs:
             cd frontend
             npm cache clean --force
             npm uninstall
-            # npm install
-            # npm run build
+            npm install
+            npm run build
 
       - save_cache:
           paths: [frontend/node_modules]
@@ -107,8 +107,8 @@ jobs:
             cd backend
             npm cache clean --force
             npm uninstall
-            # npm install
-            # npm run build
+            npm install
+            npm run build
       - save_cache:
           paths: [backend/node_modules]
           key: backend-build
