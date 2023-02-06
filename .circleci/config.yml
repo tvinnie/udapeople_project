@@ -103,7 +103,7 @@ jobs:
           name: Back-end build
           command: |
             cd backend
-            npm cache clean 
+            npm cache clean --force
             npm uninstall
 
       - save_cache:
