@@ -107,9 +107,9 @@ jobs:
             cd frontend
             npm install
             npm test
-        - save_cache: 
-          paths: [frontend/node_modules]
-          key: frontend-build
+      - save_cache: 
+        paths: [frontend/node_modules]
+        key: frontend-build
                 
   test-backend:
     docker:
