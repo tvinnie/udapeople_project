@@ -7,6 +7,7 @@ commands:
       - run:
           name: Install AWS CLI v2
           command: |
+            sudo apt-get update && sudo apt-get install -yy less
             curl "https://awscli.amazonaws.com/awscli-exe-linux-x86_64.zip" -o "awscliv2.zip"
             unzip awscliv2.zip
             sudo ./aws/install
@@ -96,10 +97,10 @@ jobs:
           name: Back-end build
           command: |
             cd backend
-            npm cache clean --force
-            rm -rf node_modules            
-            # npm install
-            # npm run build
+            # npm cache clean --force
+            # rm -rf node_modules            
+            npm install
+            npm run build
       - save_cache:
           paths: [backend/node_modules]
           key: backend-build
@@ -131,10 +132,10 @@ jobs:
           name: Back-end Unit Test
           command: |
             cd backend
-            npm cache clean --force
-            rm -rf node_modules            
-            # npm install
-            # npm test  
+            # npm cache clean --force
+            # rm -rf node_modules            
+            npm install
+            npm test  
 
   scan-frontend:
     docker:
@@ -164,12 +165,12 @@ jobs:
           name: Back-end Scan
           command: |
             cd backend
-            npm cache clean --force
-            rm -rf node_modules            
-            # npm install
-            # npm audit fix --force --audit-level=critical
-            # npm audit fix --force --audit-level=critical
-            # npm audit --audit-level=critical
+            # npm cache clean --force
+            # rm -rf node_modules            
+            npm install
+            npm audit fix --force --audit-level=critical
+            npm audit fix --force --audit-level=critical
+            npm audit --audit-level=critical
 
   deploy-infrastructure:
     docker:
@@ -235,18 +236,12 @@ jobs:
       - checkout
       - attach_workspace:
           at: .
-      - run:
-          name: Install AWS CLI dependencies
-          command: |
-            sudo apt-get update && sudo apt-get install -yy less
-            curl "https://awscli.amazonaws.com/awscli-exe-linux-x86_64.zip" -o "awscliv2.zip"
-            unzip awscliv2.zip
-            sudo ./aws/install
+      - install_awscli
       - run:
           name: Run migrations
           working_directory: ./backend
           command: |
-            # npm run migrations > migration_status
+            npm run migrations > migration_status
 
       - destroy-environment
       - revert-migrations
