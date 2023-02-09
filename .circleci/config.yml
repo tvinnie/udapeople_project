@@ -229,7 +229,8 @@ jobs:
       - destroy-environment
 
   run-migrations:
-    executor: node
+    docker:
+      - image: cimg/base:stable
     steps:
       - checkout
       - attach_workspace:
