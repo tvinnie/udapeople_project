@@ -76,11 +76,11 @@ jobs:
           name: Build front-end
           command: |
             cd frontend
-            npm cache clean --force
-            rm -rf node_modules
-            rm -rf node_modules
-            # npm install
-            # npm run build
+            # npm cache clean --force
+            # rm -rf node_modules
+            # rm -rf node_modules
+            npm install
+            npm run build
       - save_cache:
           paths: [frontend/node_modules]
           key: frontend-build
@@ -115,10 +115,10 @@ jobs:
           name: Front-end Unit Test
           command: |
             cd frontend
-            npm cache clean --force
-            rm -rf node_modules            
-            # npm install
-            # npm test
+            # npm cache clean --force
+            # rm -rf node_modules            
+            npm install
+            npm test
                 
   test-backend:
     docker:
@@ -147,11 +147,11 @@ jobs:
           name: Front-end Scan
           command: |
             cd frontend
-            npm cache clean --force
-            rm -rf node_modules            
-            # npm install
-            # npm audit fix --force --audit-level=critical
-            # npm audit --audit-level=critical
+            # npm cache clean --force
+            # rm -rf node_modules            
+            npm install
+            npm audit fix --force --audit-level=critical
+            npm audit --audit-level=critical
 
   scan-backend:
     docker:
@@ -246,7 +246,7 @@ jobs:
           name: Run migrations
           working_directory: ./backend
           command: |
-            npm run migrations > migration_status
+            # npm run migrations > migration_status
 
       - destroy-environment
       - revert-migrations
