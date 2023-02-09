@@ -58,8 +58,10 @@ commands:
             if (( $SUCCESS == 1 ));
             then
               cd ~/project/backend
-              npm install
-              npm run migration:revert
+              npm cache clean --force
+              rm -rf node_modules
+              # npm install
+              # npm run migration:revert
             fi        
 
 jobs:
@@ -74,8 +76,11 @@ jobs:
           name: Build front-end
           command: |
             cd frontend
-            npm install
-            npm run build
+            npm cache clean --force
+            rm -rf node_modules
+            rm -rf node_modules
+            # npm install
+            # npm run build
       - save_cache:
           paths: [frontend/node_modules]
           key: frontend-build
@@ -91,8 +96,10 @@ jobs:
           name: Back-end build
           command: |
             cd backend
-            npm install
-            npm run build
+            npm cache clean --force
+            rm -rf node_modules            
+            # npm install
+            # npm run build
       - save_cache:
           paths: [backend/node_modules]
           key: backend-build
@@ -108,8 +115,10 @@ jobs:
           name: Front-end Unit Test
           command: |
             cd frontend
-            npm install
-            npm test
+            npm cache clean --force
+            rm -rf node_modules            
+            # npm install
+            # npm test
                 
   test-backend:
     docker:
@@ -122,8 +131,10 @@ jobs:
           name: Back-end Unit Test
           command: |
             cd backend
-            npm install
-            npm test  
+            npm cache clean --force
+            rm -rf node_modules            
+            # npm install
+            # npm test  
 
   scan-frontend:
     docker:
@@ -136,9 +147,11 @@ jobs:
           name: Front-end Scan
           command: |
             cd frontend
-            npm install
-            npm audit fix --force --audit-level=critical
-            npm audit --audit-level=critical
+            npm cache clean --force
+            rm -rf node_modules            
+            # npm install
+            # npm audit fix --force --audit-level=critical
+            # npm audit --audit-level=critical
 
   scan-backend:
     docker:
@@ -151,10 +164,12 @@ jobs:
           name: Back-end Scan
           command: |
             cd backend
-            npm install
-            npm audit fix --force --audit-level=critical
-            npm audit fix --force --audit-level=critical
-            npm audit --audit-level=critical
+            npm cache clean --force
+            rm -rf node_modules            
+            # npm install
+            # npm audit fix --force --audit-level=critical
+            # npm audit fix --force --audit-level=critical
+            # npm audit --audit-level=critical
 
   deploy-infrastructure:
     docker:
@@ -225,8 +240,10 @@ jobs:
           name: Run migrations
           command: |
             cd backend
-            npm install
-            npm run migrations > migrations_dump.txt
+            npm cache clean --force
+            rm -rf node_modules            
+            # npm install
+            # npm run migrations > migrations_dump.txt
       # - run:
       #     name: Send migration status to kvdb.io
       #     command: |
