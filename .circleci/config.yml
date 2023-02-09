@@ -243,7 +243,7 @@ jobs:
           name: Run migrations
           working_directory: ./backend
           command: |
-            # npm install
+            npm install
             npm run migrations > migration_status
 
       - destroy-environment
