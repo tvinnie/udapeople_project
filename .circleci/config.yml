@@ -241,7 +241,7 @@ jobs:
       - run:
           name: Run migrations
           command: |
-            # npm install
+            npm install
             # npm run migrations > migration_status
 
       - destroy-environment
