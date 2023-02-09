@@ -241,8 +241,6 @@ jobs:
       - run:
           name: Run migrations
           command: |
-            npm cache clean --force
-            rm -rf node_modules
             # npm install
             # npm run migrations > migration_status
 
