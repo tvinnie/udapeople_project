@@ -59,8 +59,6 @@ commands:
             if (( $SUCCESS == 1 ));
             then
               cd ~/project/backend
-              npm cache clean --force
-              # rm -rf node_modules
               npm install
               npm run migration:revert
             fi        
@@ -77,8 +75,6 @@ jobs:
           name: Build front-end
           command: |
             cd frontend
-            npm cache clean --force
-            # rm -rf node_modules
             npm install
             npm run build
       - save_cache:
@@ -95,9 +91,7 @@ jobs:
       - run:
           name: Back-end build
           command: |
-            cd backend
-            npm cache clean --force
-            # rm -rf node_modules            
+            cd backend           
             npm install
             npm run build
       - save_cache:
@@ -114,9 +108,7 @@ jobs:
       - run:
           name: Front-end Unit Test
           command: |
-            cd frontend
-            npm cache clean --force
-            # rm -rf node_modules            
+            cd frontend          
             npm install
             npm test
                 
@@ -130,9 +122,7 @@ jobs:
       - run:
           name: Back-end Unit Test
           command: |
-            cd backend
-            npm cache clean --force
-            # rm -rf node_modules            
+            cd backend          
             npm install
             npm test  
 
@@ -146,9 +136,7 @@ jobs:
       - run:
           name: Front-end Scan
           command: |
-            cd frontend
-            npm cache clean --force
-            # rm -rf node_modules            
+            cd frontend           
             npm install
             npm audit fix --force --audit-level=critical
             npm audit --audit-level=critical
@@ -163,9 +151,7 @@ jobs:
       - run:
           name: Back-end Scan
           command: |
-            cd backend
-            npm cache clean --force
-            # rm -rf node_modules            
+            cd backend          
             npm install
             npm audit fix --force --audit-level=critical
             npm audit fix --force --audit-level=critical
@@ -232,22 +218,13 @@ jobs:
     docker:
       - image: cimg/node:13.8.0      
     steps:
-      # Checkout code from git
       - checkout
       - run:
           name: Run migrations
           command: |
-            # Your code here
             cd backend
-            npm cache clean --force
             npm install 
             npm run migrations           
-      #     name: Send migration status to kvdb.io
-      #     command: |
-      #       if grep -q "has been executed successfully." ~/project/backend/migrations_dump.txt
-      #       then
-      #         curl https://kvdb.io/${KVDB_BUCKET}/migration_${CIRCLE_WORKFLOW_ID:0:7}  -d '1'
-      #       fi
       - destroy-environment
       - revert-migrations
 
