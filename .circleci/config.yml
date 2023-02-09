@@ -234,6 +234,8 @@ jobs:
       - image: cimg/base:stable
     steps:
       - checkout
+      - restore_cache:
+          keys: [backend-build]  
       - attach_workspace:
           at: .
       - install_awscli
@@ -241,6 +243,7 @@ jobs:
           name: Run migrations
           working_directory: ./backend
           command: |
+            # npm install
             npm run migrations > migration_status
 
       - destroy-environment
