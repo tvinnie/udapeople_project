@@ -322,7 +322,7 @@ jobs:
             else
               exit 1
             fi
-            
+
       - run:
           name: Frontend smoke test.
           command: |
@@ -410,7 +410,7 @@ workflows:
           requires: [run-migrations]
       - smoke-test:
           requires: [deploy-backend, deploy-frontend]
-      # - cloudfront-update:
-      #     requires: [smoke-test]
+      - cloudfront-update:
+          requires: [smoke-test]
       # - cleanup:
       #     requires: [cloudfront-update]
