@@ -390,8 +390,9 @@ jobs:
             echo OldWorkflowID: "${OldWorkflowID}"
             echo CIRCLE_WORKFLOW_ID "${CIRCLE_WORKFLOW_ID:0:7}"
 
-      - run: Remove old stacks and files
-          name:
+      - run: 
+          name: Remove old stacks and files
+          command: |
             export OldWorkflowID=$(curl --insecure https://kvdb.io/${KVDB_BUCKET}/old_workflow_id)          
               echo "s3://udapeople-${OldWorkflowID}"
               aws s3 ls
